@@ -1,0 +1,104 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Product Requirements Document
+
+## 1. **Overview & Purpose**
+
+This application will enable users to **locally** upload their exported JSON files (e.g. ChatGPT conversation data) and analyze them **in the browser** without server‐side data storage. The app will:
+
+1. Perform **token counting**, **cost estimation**, and **usage analysis** client‐side.  
+2. Produce **interactive graphs and charts**
+3. Allow users to **share** these aggregated visualizations via png export
+
+Because all parsing and analytics happen on the client, the user’s original conversation data never leaves their browser. The app will be deployed on a serverless platform (Cloudflare Workers) using Next.js.
+
+## 2. **Goals**
+
+### **Goals**
+
+1. **Client‐Side Processing**  
+   - Entirely in‐browser parsing and aggregation for privacy.  
+   - No server storage or liability for user data.  
+
+2. **Analytics & Visualization**
+   - shareable micro-infographic cards -  usage / cost / num of interactions / num of messages / fav model / most cost guzzling model / etc etc…
+   - cumulative treemap (usage / cost / num of interactions / num of messages) or sunburst hierarchical
+   - github style calendar heatmap (usage / num of interactions / num of messages)
+   - stream chart for usage / cost / num of interactions / num of messages over time
+   - ridgeline plot for time of day (usage / num of interactions / num of messages)
+   - Provide filtering and drill‐down in the UI where applicable (e.g., by month, by model).
+
+## 3. **High‐Level User Flow**
+
+1. **User uploads their conversation JSON** (exported from ChatGPT/OpenAI).  
+2. The app reads the file **client‐side** and processes it:
+   - Token counting and cost calculation for each conversation / model.  
+   - Summaries of usage by month, total cost, etc.  
+   - Optional advanced parsing for images, partial PDF coverage, etc.  
+3. The app displays **visualizations** and **charts**
+4. The user optionally **shares** their results:
+   - via simple DOM to png util
+
+## 4. **Key Features & Requirements**
+
+1. **Next.js + Cloudflare Deployment**  
+   - Must be built in Next.js 13+ (App Router or Pages Router).  
+   - Hosted on Cloudflare Workers with minimal cold start overhead.  
+   - Provide client‐side code for reading the user’s file.
+
+2. **Client‐Side Data Handling**  
+   - Use HTML `<input type="file" />` or drag‐and‐drop to load the JSON.  
+   - *No data stored on the server.* Show a disclaimer stating that data remains local.  
+   - For large files (100 MB+), consider chunked parsing or some feedback (progress bar, etc.).
+
+3. **Parsing & Token Counting**  
+   - Incorporate [**tiktoken** (WASM version)](mdc:https:/www.npmjs.com/package/tiktoken) or a similar library to tokenize text.  
+   - Handle images in conversation data with an approximation (85 tokens for low detail, tile‐based approach for high detail).  
+   - Possibly detect PDFs or other attachments, but handle them with a placeholder or default token count if we do not have a specialized method.
+
+4. **Cost Calculation & Models**  
+   - Maintain a mapping (`MODEL_COSTS`) with per‐million‐token input and output rates.  
+   - Summarize usage by `(model_slug, month)` with total tokens and cost.  
+
+5. **Visualization Layer**  
+   - Provide several charts to help users interpret data
+
+6. **Sharing Mechanism**  
+   - via a very simple DOM to png util
+
+7. **Disclaimer & Help Page**  
+   - On the homepage or in a modal, disclaim: “**We do not store or transmit your data.** Everything is processed locally in your browser.”  
+   - Additional page (e.g., `/docs` or `/notes`) explaining known limitations:
+     - How images are handled (tiling for large images, 85 tokens for low detail).  
+     - PDFs or other file attachments are currently recognized with a default placeholder.  
+     - Model cost assumptions.
+
+## 6. **Constraints & Considerations**
+
+1. **Performance**:  
+   - 150 MB+ JSON files may require chunking or a web worker approach. We must handle memory usage carefully in the browser.  
+
+2. **Cloudflare Workers**:  
+   - Next.js must be adapted to run in Cloudflare’s Edge environment.  
+   - All serverless or SSR must be minimal since main logic is client‐side.
+
+## 7. **Technical Approach**
+
+1. **Next.js**  
+   - Use **App Router** or **Pages Router** with a dedicated page for the main functionality.  
+   - Minimal server‐side code: only for serving the static app, no data storage.  
+
+2. **Client‐Side**  
+   - HTML `<input type="file" />` for uploading the JSON.  
+   - A custom aggregator library in **TypeScript** that:  
+     - Uses [**tiktoken** WASM**](mdc:https:/www.npmjs.com/package/tiktoken) to tokenize text.  
+     - Splits conversation data into messages, counting tokens for each.  
+     - Summarizes usage by `(model_slug, month)`.  
+     - Estimation for images.  
+
+3. **Visualization**  
+   - Chart library (Nivo) for interactive graphs.  
+   - On successful parse, show a dashboard with summary data.

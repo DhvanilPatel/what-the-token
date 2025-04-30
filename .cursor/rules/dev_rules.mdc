@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+some pointers for this repo:
+- we use pnpm
+- it's a good idea to get a sense of the current files / directory structure before working on the user query

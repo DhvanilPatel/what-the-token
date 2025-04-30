@@ -1,0 +1,9 @@
+.canvas {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  /* Height controlled in JS to match page height. */
+}

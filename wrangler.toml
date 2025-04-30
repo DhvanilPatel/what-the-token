@@ -1,0 +1,7 @@
+name = "what-the-token"
+compatibility_date = "2025-03-25"
+compatibility_flags = ["nodejs_compat"]
+main = ".vercel/output/static/_worker.js"
+
+[site]
+bucket = ".vercel/output/static" 
