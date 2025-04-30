@@ -87,7 +87,7 @@ function CustomDialogDescription({
 export function GitHubLink() {
   return (
     <Link
-      href="https://github.com/dhvanil-crestdata/what-the-token"
+      href="https://github.com/dhvanilpatel/what-the-token"
       target="_blank"
       rel="noopener noreferrer"
       className="!text-xs !tracking-wide text-[#B08AFF] hover:text-[#B08AFF] transition !font-mono border-b border-[#730FFF] border-opacity-20 rounded-xs py-0.5 hover:cursor-pointer"
@@ -205,7 +205,7 @@ export function HowItWorksDialog() {
                     <p>
                       the entire source code is public on{" "}
                       <Link
-                        href="https://github.com/dhvanil-crestdata/what-the-token"
+                        href="https://github.com/dhvanilpatel/what-the-token"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-violet-400 hover:text-violet-300 transition  border-b border-[#730FFF]/50 rounded-xs hover:cursor-pointer"
@@ -223,7 +223,7 @@ export function HowItWorksDialog() {
                       no cookies, tracking scripts, or analytics are used. the
                       app's dependencies are pinned via{" "}
                       <Link
-                        href="https://github.com/dhvanil-crestdata/what-the-token"
+                        href="https://github.com/DhvanilPatel/what-the-token/blob/main/pnpm-lock.yaml"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-violet-400 hover:text-violet-300 transition  border-b border-[#730FFF]/50 rounded-xs hover:cursor-pointer"
@@ -414,7 +414,7 @@ export function HowItWorksDialog() {
                     <p>
                       the complete token counting algorithm can be found in the{" "}
                       <Link
-                        href="https://github.com/dhvanil-crestdata/what-the-token/blob/main/lib/calculator.ts"
+                        href="https://github.com/DhvanilPatel/what-the-token/blob/main/lib/calculator.ts"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-violet-400 hover:text-violet-300 transition border-b border-[#730FFF]/50 rounded-xs hover:cursor-pointer"
@@ -516,7 +516,7 @@ export function HowItWorksDialog() {
                       the complete cost calculation implementation can be found
                       in the{" "}
                       <Link
-                        href="https://github.com/dhvanil-crestdata/what-the-token/blob/main/lib/calculator.ts"
+                        href="https://github.com/DhvanilPatel/what-the-token/blob/main/lib/calculator.ts"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-violet-400 hover:text-violet-300 transition border-b border-[#730FFF]/50 rounded-xs hover:cursor-pointer"
@@ -748,7 +748,7 @@ export function HowItWorksDialog() {
                       for any feedback, questions, bugs, or suggestions — please
                       add an issue on{" "}
                       <Link
-                        href="https://github.com/dhvanil-crestdata/what-the-token/issues"
+                        href="https://github.com/DhvanilPatel/what-the-token/issues"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-violet-400 hover:text-violet-300 transition border-b border-[#730FFF]/50 rounded-xs hover:cursor-pointer"

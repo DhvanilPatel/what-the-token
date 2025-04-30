@@ -33,15 +33,15 @@
 
 ## Branding & Attribution
 - [x] Add "Made by dhvanil" footer or about section
-- [ ] Add GitHub link to repository
+- [x] Add GitHub link to repository
 - [x] Consider adding social links
 
 ## Open Source
-- [ ] Upload project to GitHub
-- [ ] Add appropriate open source license
-- [ ] Write comprehensive README
-  - [ ] Installation instructions
-  - [ ] Usage guide
+- [x] Upload project to GitHub
+- [x] Add appropriate open source license
+- [x] Write comprehensive README
+  - [x] Installation instructions
+  - [x] Usage guide
   - [ ] Contributing guidelines
 
 ## Performance Optimization
