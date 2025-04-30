@@ -100,7 +100,7 @@ export function GitHubLink() {
 export function ViewTestPageButton() {
   return (
     <Link
-      href="/test"
+      href="/example"
       className="!text-xs !tracking-wide text-[#B08AFF] hover:text-[#B08AFF] transition !font-mono border-b border-[#730FFF] border-opacity-20 rounded-xs py-0.5 hover:cursor-pointer"
     >
       example
