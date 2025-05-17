@@ -40,25 +40,22 @@ type BarData = BarDataPoint[];
 
 // Helper function to get ISO week number and year (e.g., 2023-W42)
 const getWeekKey = (dateString: string): string => {
-  const date = new Date(dateString);
-  // Adjust to UTC to avoid timezone issues affecting week calculation
-  date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7)); // Adjust to Thursday of the week
-  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  const date = new Date(dateString + "T00:00:00");
+  // Adjust to local timezone when calculating ISO week number
+  date.setDate(date.getDate() + 4 - (date.getDay() || 7)); // Adjust to Thursday of the week
+  const yearStart = new Date(date.getFullYear(), 0, 1);
   // Calculate full weeks to Thursday
   const weekNo = Math.ceil(
     ((date.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
   );
   // Return YYYY-Www format
-  return `${date.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+  return `${date.getFullYear()}-W${String(weekNo).padStart(2, "0")}`;
 };
 
 // Helper function to get month key from date string (e.g., 2023-05)
 const getMonthKey = (dateString: string): string => {
-  const date = new Date(dateString);
-  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(
-    2,
-    "0"
-  )}`;
+  const date = new Date(dateString + "T00:00:00");
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
 };
 
 // Format week key as Quarter + Year
