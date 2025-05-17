@@ -274,7 +274,8 @@ export async function countImageTokens(
 //
 
 /**
- * Convert a Unix timestamp (in seconds or milliseconds) to a UTC YYYY-MM-DD string.
+ * Convert a Unix timestamp (in seconds or milliseconds) to a YYYY-MM-DD string
+ * in the browser's local timezone.
  * @param unixTime Unix timestamp in seconds (or ms, if > 1e11)
  */
 export function getDayKey(unixTime: number): string {
@@ -283,21 +284,22 @@ export function getDayKey(unixTime: number): string {
     unixTime = Math.floor(unixTime / 1000);
   }
   const date = new Date(unixTime * 1000);
-  const y = date.getUTCFullYear();
-  const m = String(date.getUTCMonth() + 1).padStart(2, "0");
-  const d = String(date.getUTCDate()).padStart(2, "0");
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
   return `${y}-${m}-${d}`;
 }
 
 /**
- * Extract the hour (0-23) from a Unix timestamp (in seconds or milliseconds).
+ * Extract the hour (0-23) from a Unix timestamp (in seconds or milliseconds)
+ * using the browser's local timezone.
  * @param unixTime Unix timestamp in seconds (or ms, if > 1e11)
  */
 export function getHourOfDay(unixTime: number): number {
   if (unixTime > 1e11) {
     unixTime = Math.floor(unixTime / 1000);
   }
-  return new Date(unixTime * 1000).getUTCHours();
+  return new Date(unixTime * 1000).getHours();
 }
 
 //

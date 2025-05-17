@@ -51,8 +51,8 @@ const DAY_ABBR = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 // Helper: get day of week (0=Sun, 6=Sat) from YYYY-MM-DD
 function getDayOfWeek(dayKey: string): number {
   const [year, month, day] = dayKey.split("-").map(Number);
-  const date = new Date(Date.UTC(year, month - 1, day));
-  return date.getUTCDay();
+  const date = new Date(year, month - 1, day);
+  return date.getDay();
 }
 
 // Helper function to generate controlled random value
