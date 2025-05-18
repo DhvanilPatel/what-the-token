@@ -49,20 +49,30 @@ export const metadata = {
   },
 };
 
+const initTheme = `(() => {
+  try {
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = stored || (prefersDark ? 'dark' : 'light');
+    document.documentElement.classList.add(theme);
+  } catch (e) {}
+})();`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* Preload background images */}
         <link rel="preload" href="/images/bg-1.png" as="image" />
         <link rel="preload" href="/images/bg-2.png" as="image" />
+        <script dangerouslySetInnerHTML={{ __html: initTheme }} />
       </head>
       <body
-        className={`${geistMono.className} ${geistSans.className}  min-h-screen`}
+        className={`${geistMono.className} ${geistSans.className} min-h-screen bg-background text-foreground`}
       >
         {children}
       </body>

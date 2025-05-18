@@ -16,6 +16,7 @@ This privacy-focused web application lets you analyze your exported AI conversat
   - Day-of-week distributions
   - Model usage comparisons
 - Share visualizations via PNG export
+- Toggle between light and dark mode
 
 ## Privacy & Security
 

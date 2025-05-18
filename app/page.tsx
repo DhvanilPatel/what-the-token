@@ -23,6 +23,7 @@ import {
   HowItWorksDialog,
   ViewTestPageButton,
 } from "./components/ui/InfoDialogs";
+import ThemeToggle from "./components/ui/ThemeToggle";
 import { AlertTriangle } from "lucide-react";
 
 // Mark this page as client-side only rendering
@@ -149,6 +150,7 @@ export default function HomePage() {
 
         {/* Dialog buttons */}
         <div className="flex space-x-6 mb-6 pl-2 -mt-2">
+          <ThemeToggle />
           <ViewTestPageButton />
           <GitHubLink />
           <HowItWorksDialog />
