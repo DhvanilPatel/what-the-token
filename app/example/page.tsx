@@ -21,9 +21,6 @@ import {
 } from "@/app/components/ui/InfoDialogs";
 import { AlertTriangle } from "lucide-react";
 
-// Mark this page as client-side only rendering
-export const dynamic = "force-dynamic";
-
 export default function TestPage() {
   const [status, setStatus] = useState<string>("");
   const [results, setResults] = useState<Aggregator | null>(null);

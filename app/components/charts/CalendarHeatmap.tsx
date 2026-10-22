@@ -222,6 +222,39 @@ export default function CalendarHeatmap({ aggregator }: CalendarHeatmapProps) {
   const [selectedModels, setSelectedModels] = useState<string[]>([]); // State moved back here
   const chartContainerRef = useRef<HTMLDivElement>(null); // Ref for the chart container
 
+  // Handle PNG Export (similar to other charts)
+  const handleExport = useCallback(() => {
+    if (chartContainerRef.current === null) {
+      return;
+    }
+
+    htmlToImage
+      .toPng(chartContainerRef.current, {
+        backgroundColor: "#1e1b4b", // Dark background for export
+        filter: (node) => {
+          // Exclude the filter controls container
+          if (
+            node instanceof HTMLElement &&
+            node.classList.contains("chart-controls-container")
+          ) {
+            return false;
+          }
+          return true; // Include everything else (including Nivo legend)
+        },
+      })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = `calendar-heatmap-${selectedMetric}-${
+          selectedModels.length > 0 ? selectedModels.join("-") : "all-models"
+        }.png`;
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.error("Oops, something went wrong!", err);
+      });
+  }, [selectedMetric, selectedModels]); // Dependencies
+
   // Create model options from the aggregator data
   const modelOptions: MultiSelectOption[] = useMemo(() => {
     if (!aggregator || !aggregator.allModelSlugs) return [];
@@ -283,39 +316,6 @@ export default function CalendarHeatmap({ aggregator }: CalendarHeatmapProps) {
 
   // --- MODIFICATION: Use Fixed Height for 3 years ---
   const fixedChartHeight = 580; // Fixed height suitable for 3 years + margins/legend
-
-  // Handle PNG Export (similar to other charts)
-  const handleExport = useCallback(() => {
-    if (chartContainerRef.current === null) {
-      return;
-    }
-
-    htmlToImage
-      .toPng(chartContainerRef.current, {
-        backgroundColor: "#1e1b4b", // Dark background for export
-        filter: (node) => {
-          // Exclude the filter controls container
-          if (
-            node instanceof HTMLElement &&
-            node.classList.contains("chart-controls-container")
-          ) {
-            return false;
-          }
-          return true; // Include everything else (including Nivo legend)
-        },
-      })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = `calendar-heatmap-${selectedMetric}-${
-          selectedModels.length > 0 ? selectedModels.join("-") : "all-models"
-        }.png`;
-        link.href = dataUrl;
-        link.click();
-      })
-      .catch((err) => {
-        console.error("Oops, something went wrong!", err);
-      });
-  }, [selectedMetric, selectedModels]); // Dependencies
 
   return (
     <div className="relative w-full">

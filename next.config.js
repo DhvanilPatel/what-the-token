@@ -4,6 +4,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   webpack: (config, { isServer }) => {
     // Let Webpack handle async WASM, required by tiktoken
     config.experiments = {
@@ -34,28 +35,7 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {},
 
-  headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: `
-              default-src 'self';
-              img-src 'self' data:;
-              script-src 'self' 'unsafe-inline' 'unsafe-eval';
-              style-src 'self' 'unsafe-inline';
-              connect-src 'self';
-              worker-src 'self' blob:;
-            `
-              .replace(/\s{2,}/g, " ")
-              .trim(),
-          },
-        ],
-      },
-    ];
-  },
+
 };
 
 // Wrap your config with the analyzer

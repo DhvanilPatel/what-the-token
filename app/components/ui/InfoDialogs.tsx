@@ -174,7 +174,7 @@ export function HowItWorksDialog() {
                       →
                     </p>
                     <p>
-                      it's never saved permanently or stored anywhere long-term.
+                      it&apos;s never saved permanently or stored anywhere long-term.
                       all processing happens in volatile memory.
                     </p>
                   </div>
@@ -221,7 +221,7 @@ export function HowItWorksDialog() {
                     </p>
                     <p>
                       no cookies, tracking scripts, or analytics are used. the
-                      app's dependencies are pinned via{" "}
+                      app&apos;s dependencies are pinned via{" "}
                       <Link
                         href="https://github.com/DhvanilPatel/what-the-token/blob/main/pnpm-lock.yaml"
                         target="_blank"
@@ -275,27 +275,23 @@ export function HowItWorksDialog() {
                     <p>
                       the application is a static{" "}
                       <code className="text-violet-100/90 text-3xs bg-[#B08AFF]/20 px-1 rounded-xs !font-mono mx-0.5">
-                        next.js 15.2.4
+                        next.js
                       </code>{" "}
-                      bundle, compiled using the{" "}
-                      <code className="text-violet-100/90 text-3xs bg-[#B08AFF]/20 px-1 rounded-xs !font-mono mx-0.5">
-                        opennext
-                      </code>{" "}
-                      adapter for cloudflare compatibility.
+                      bundle exported as HTML, CSS, and JavaScript.
                     </p>
                   </div>
                   <div className="flex flex-row items-start space-x-1">
                     <p className="text-violet-600/60 mt-px font-light font-mono text-3xs">
                       →
                     </p>
-                    <p>it's deployed as a single cloudflare worker.</p>
+                    <p>it&apos;s hosted on cloudflare pages.</p>
                   </div>
                   <div className="flex flex-row items-start space-x-1">
                     <p className="text-violet-600/60 mt-px font-light font-mono text-3xs">
                       →
                     </p>
                     <p>
-                      assets are served directly from cloudflare's edge cache,
+                      assets are served directly from cloudflare&apos;s edge cache,
                       minimizing latency.
                     </p>
                   </div>
@@ -303,7 +299,7 @@ export function HowItWorksDialog() {
                     <p className="text-violet-600/60 mt-px font-light font-mono text-3xs">
                       →
                     </p>
-                    <p>there's no backend or database involved.</p>
+                    <p>there&apos;s no backend or database involved.</p>
                   </div>
                 </div>
               </div>
@@ -325,7 +321,7 @@ export function HowItWorksDialog() {
                       <code className="text-violet-100/90 text-3xs bg-[#B08AFF]/20 px-1 rounded-xs !font-mono mx-0.5">
                         conversations.json
                       </code>{" "}
-                      file is read directly into the browser's memory using the
+                      file is read directly into the browser&apos;s memory using the
                       standard file api.
                     </p>
                   </div>
@@ -440,7 +436,7 @@ export function HowItWorksDialog() {
                       →
                     </p>
                     <p>
-                      image token counts follow openai's documented formula: a
+                      image token counts follow openai&apos;s documented formula: a
                       base cost of 85 tokens per image.
                     </p>
                   </div>
@@ -461,7 +457,7 @@ export function HowItWorksDialog() {
                     <p>
                       images exceeding 2048 pixels in either dimension are
                       treated as scaled down to fit within that limit before
-                      tile calculation, per the model's handling.
+                      tile calculation, per the model&apos;s handling.
                     </p>
                   </div>
                 </div>
@@ -494,7 +490,7 @@ export function HowItWorksDialog() {
                     </p>
                     <p>
                       the calculation does not currently factor in potential
-                      discounts for cached tokens, as this information isn't
+                      discounts for cached tokens, as this information isn&apos;t
                       available in the export.
                     </p>
                   </div>
@@ -572,7 +568,7 @@ export function HowItWorksDialog() {
                     </p>
                     <p>
                       deep research calculations are significantly
-                      underestimated, as the export don't include reasoning
+                      underestimated, as the export don&apos;t include reasoning
                       tokens.{" "}
                       <code className="text-violet-100/90 text-3xs bg-[#B08AFF]/20 px-1 rounded-xs !font-mono mx-0.5">
                         o3-mini-high
@@ -620,7 +616,7 @@ export function HowItWorksDialog() {
                         rel="noopener noreferrer"
                         className="text-violet-400 hover:text-violet-300 transition border-b border-[#730FFF]/50 rounded-xs hover:cursor-pointer"
                       >
-                        ykob's three.js sketch
+                        ykob&apos;s three.js sketch
                       </Link>
                       .
                     </p>
@@ -636,7 +632,7 @@ export function HowItWorksDialog() {
                       →
                     </p>
                     <p>
-                      the "export png" feature uses the{" "}
+                      the &quot;export png&quot; feature uses the{" "}
                       <code className="text-violet-100/90 text-3xs bg-[#B08AFF]/20 px-1 rounded-xs !font-mono mx-0.5">
                         html-to-image
                       </code>{" "}
@@ -660,8 +656,8 @@ export function HowItWorksDialog() {
                       →
                     </p>
                     <p>
-                      cloudflare worker cold starts are typically negligible
-                      (sub 50ms).
+                      static pages are served from cloudflare&apos;s edge cache;
+                      there is no application server to start.
                     </p>
                   </div>
                   <div className="flex flex-row items-start space-x-1">

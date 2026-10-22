@@ -29,7 +29,7 @@ This privacy-focused web application lets you analyze your exported AI conversat
 
 ### Prerequisites
 
-- Node.js 18+ and pnpm
+- Node.js 24.22.1+ and pnpm 10.34.7
 
 ### Installation
 
@@ -46,13 +46,15 @@ This privacy-focused web application lets you analyze your exported AI conversat
 
 ## Technical Implementation
 
-- **Framework**: Next.js 15.2.4
-- **Deployment**: Cloudflare Workers (via OpenNext adapter)
+- **Framework**: Next.js 15.5.28
+- **Deployment**: Cloudflare Pages static export (`pnpm build` produces `out/`; `pnpm deploy` publishes it)
 - **Token Counting**: WASM-compiled version of js-tiktoken in a dedicated web worker
 - **File Processing**: Handles large files (100MB+) via chunked streams
 - **Visualization**: Powered by Nivo charts library
 - **Styling**: Tailwind CSS
 - **Image Export**: HTML-to-image for client-side PNG generation
+
+The deployed site contains static assets only; no Next.js server, Server Actions, or OpenNext adapter runs in production. Security headers are configured in `public/_headers`.
 
 ## Limitations
 

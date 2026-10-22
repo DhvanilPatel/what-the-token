@@ -1,13 +1,13 @@
 # Contributor Guide
 
 ## Overview
-This project is **What The Token**, a Next.js app deployed to Cloudflare Workers. It lets users upload their exported ChatGPT conversation JSON and analyzes it locally in the browser. Tokenization uses the WASM version of `js-tiktoken` inside a web worker. Costs are estimated per model, and results are shown through Nivo charts. All processing is client side; no conversation data leaves the user's browser.
+This project is **What The Token**, a Next.js app exported as static assets to Cloudflare Pages. It lets users upload their exported ChatGPT conversation JSON and analyzes it locally in the browser. Tokenization uses the WASM version of `js-tiktoken` inside a web worker. Costs are estimated per model, and results are shown through Nivo charts. All processing is client side; no conversation data leaves the user's browser.
 
 ## Development
-- Use **pnpm** with Node 20+ (`.nvmrc` and `.node-version` specify 20.x).
+- Use **pnpm** with Node 24.22.1 (`.nvmrc` and `.node-version` pin the patched runtime).
 - Install dependencies with `pnpm install`.
 - Run the dev server with `pnpm dev`.
-- Preview the Cloudflare build with `pnpm preview` and deploy with `pnpm deploy`.
+- Preview the static Cloudflare Pages build with `pnpm preview` and deploy with `pnpm deploy`.
 - Familiarize yourself with the file structure (`app`, `lib`, `components`, etc.) before making changes.
 
 ## Validation
@@ -18,7 +18,7 @@ This project is **What The Token**, a Next.js app deployed to Cloudflare Workers
 - **app/** contains Next.js pages and UI components.
 - **lib/** provides token counting, cost calculation, and utilities.
 - **components/** holds shared UI primitives.
-- Cloudflare configuration lives in `.cloudflare/` and `wrangler.toml`.
+- Cloudflare configuration lives in `.cloudflare/` and `wrangler.toml`; `public/_headers` supplies production security headers. `pnpm build` outputs `out/`.
 - Tailwind is configured via `tailwind.config.js` and global styles in `app/globals.css`.
 
 ## Product Notes

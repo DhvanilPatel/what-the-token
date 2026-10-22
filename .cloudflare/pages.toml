@@ -1,4 +1,4 @@
 [build]
-  command = "pnpm opennextjs-cloudflare build"
-  node_version = "20.11.1"
-  publish = ".open-next/assets" 
+  command = "pnpm build"
+  node_version = "24.22.1"
+  publish = "out"

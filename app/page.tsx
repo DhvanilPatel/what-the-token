@@ -25,9 +25,6 @@ import {
 } from "./components/ui/InfoDialogs";
 import { AlertTriangle } from "lucide-react";
 
-// Mark this page as client-side only rendering
-export const dynamic = "force-dynamic";
-
 // File size limit in MB
 const FILE_SIZE_LIMIT = 200;
 

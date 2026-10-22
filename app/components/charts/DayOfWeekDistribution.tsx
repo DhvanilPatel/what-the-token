@@ -3,9 +3,7 @@
 import React, { useState, useMemo, useRef, useCallback } from "react";
 import {
   ResponsiveLine,
-  Serie,
-  PointTooltipProps,
-  CustomLayerProps,
+  LineCustomSvgLayerProps,
 } from "@nivo/line";
 import { area, curveMonotoneX, curveBasis } from "d3-shape";
 import { Aggregator } from "@/lib/calculator";
@@ -34,6 +32,11 @@ interface ExtendedDataPoint {
   y: number; // offset + normalized average
   originalAvg?: number;
   baseY: number; // offset baseline for that day
+}
+
+interface WeeklySeries {
+  id: string;
+  data: ExtendedDataPoint[];
 }
 
 // Day-of-week lookups
@@ -123,9 +126,9 @@ function calculateWeeklyHourlyAverages(
   return totalEntries === 0 ? null : weeklyData;
 }
 
-// Transform that 7×24 grid into Nivo `Serie[]` with each day offset
-function transformAverageDataForLine(weeklyData: WeeklyHourData): Serie[] {
-  const series: Serie[] = [];
+// Transform that 7×24 grid into a series for each day.
+function transformAverageDataForLine(weeklyData: WeeklyHourData): WeeklySeries[] {
+  const series: WeeklySeries[] = [];
   let globalMaxAvg = 0;
 
   // First, find max average across all day/hour for normalization
@@ -239,7 +242,7 @@ function transformAverageDataForLine(weeklyData: WeeklyHourData): Serie[] {
 }
 
 // Custom layer to draw the "ridgeline" fill from baseY up to y (instead of from y down to 0)
-function RidgelineAreaLayer({ series, xScale, yScale }: CustomLayerProps) {
+function RidgelineAreaLayer({ series, xScale, yScale }: LineCustomSvgLayerProps<WeeklySeries>) {
   // We'll use d3-shape's area generator with a basis curve for smoothing
   const areaGen = area<ExtendedDataPoint>()
     // Explicitly cast scales to numeric functions for d3-shape
@@ -470,7 +473,7 @@ export default function DayOfWeekDistribution({
 
       {/* Chart */}
       <div style={{ height: "400px", paddingTop: "60px" }}>
-        <ResponsiveLine
+        <ResponsiveLine<WeeklySeries>
           data={chartData}
           theme={theme}
           margin={{ top: 20, right: 10, bottom: 50, left: 40 }}

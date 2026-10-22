@@ -65,14 +65,8 @@ const GlitchText: React.FC<GlitchTextProps> = ({
     return findNthIndex(text, targetChar!, targetInstance);
   }, [text, targetChar, targetInstance, shouldAnimateChars]);
 
-  // Initialize state only if animating characters
-  const [animatedChar, setAnimatedChar] = useState<string | null>(() => {
-    if (shouldAnimateChars && targetIndex !== -1) {
-      // We know replacementChars is valid array here
-      return getRandomChar(replacementChars!, null);
-    }
-    return null; // No animation or target not found
-  });
+  // Match the exported HTML on first render; start randomness after hydration.
+  const [animatedChar, setAnimatedChar] = useState<string | null>(null);
 
   useEffect(() => {
     // Only set up interval if character animation is intended and the target was found
@@ -141,13 +135,9 @@ const GlitchText: React.FC<GlitchTextProps> = ({
   const charToDisplay =
     animatedChar ?? (targetIndex !== -1 ? text[targetIndex] : ""); // Handle potential null animatedChar
 
-  const dataText = useMemo(() => {
-    // Only construct glitchy data-text if target was found and we have a char to display
-    if (targetIndex !== -1) {
-      return `${prefix}${charToDisplay}${suffix}`;
-    }
-    return text; // Fallback to original text
-  }, [prefix, charToDisplay, suffix, text, targetIndex]);
+  const dataText = targetIndex !== -1
+    ? `${prefix}${charToDisplay}${suffix}`
+    : text;
 
   return (
     <div className={`${styles.glitch} ${className}`} data-text={dataText}>
